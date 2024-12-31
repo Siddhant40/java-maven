@@ -1,29 +1,37 @@
 pipeline {
     agent any
     tools {
-        maven 'Maven' // Name you configured in Jenkins
+        maven 'Maven' // Ensure this matches the Maven installation name in Jenkins
     }
     environment {
-        SONAR_SCANNER_PATH = 'C:\\Users\\91844\\Downloads\\sonar-scanner-cli-6.2.1.4610-windows-x64\\sonar-scanner-6.2.1.4610-windows-x64\\bin\\sonar-scanner.bat'  // Add this line
+        SONAR_SCANNER_PATH = 'C:\\Users\\91844\\Downloads\\sonar-scanner-cli-6.2.1.4610-windows-x64\\sonar-scanner-6.2.1.4610-windows-x64\\bin\\sonar-scanner.bat'
+        SONAR_HOST_URL = 'http://localhost:9000'
+        SONAR_PROJECT_KEY = 'Maven-java'
+        SONAR_PROJECT_NAME = 'Maven-java'
     }
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/Siddhant40/java-maven.git' // Replace with your repo URL
+                git branch: 'main', url: 'https://github.com/Siddhant40/java-maven.git' // Replace with your GitHub repository URL
             }
         }
-        stage('Build and Analyze') {
-             environment {
-                SONAR_TOKEN = credentials('SonarQube')
+        stage('Build') {
+            steps {
+                bat 'mvn clean install' // Clean and build the project
+            }
+        }
+        stage('SonarQube Analysis') {
+            environment {
+                SONAR_TOKEN = credentials('SonarQube') // Jenkins credential ID for SonarQube token
             }
             steps {
                 bat """
-                    mvn clean verify sonar:sonar -X ^
-                    -Dsonar.projectKey=Maven-java ^
-                    -Dsonar.projectName=Maven-java ^
+                    mvn verify sonar:sonar ^
+                    -Dsonar.projectKey=${SONAR_PROJECT_KEY} ^
+                    -Dsonar.projectName=${SONAR_PROJECT_NAME} ^
                     -Dsonar.sources=. ^
-                    -Dsonar.host.url=http://localhost:9000 ^
-                    -Dsonar.token=%SONAR_TOKEN% ^
+                    -Dsonar.host.url=${SONAR_HOST_URL} ^
+                    -Dsonar.token=%SONAR_TOKEN%
                 """
             }
         }
@@ -36,7 +44,7 @@ pipeline {
             echo 'Build or analysis failed!'
         }
         always {
-            echo 'This will always run, regardless of success or failure.'
+            echo 'Pipeline execution finished.'
         }
     }
 }
