@@ -17,7 +17,12 @@ pipeline {
         }
         stage('Build') {
             steps {
-                bat 'mvn clean install' // Clean and build the project
+                bat 'mvn -X clean install' // Clean and build the project
+            }
+        }
+        stage('Unit Tests') {
+            steps {
+                bat 'mvn test' // Run unit tests separately
             }
         }
         stage('SonarQube Analysis') {
@@ -26,7 +31,7 @@ pipeline {
             }
             steps {
                 bat """
-                    mvn verify sonar:sonar ^
+                    mvn sonar:sonar ^
                     -Dsonar.projectKey=${SONAR_PROJECT_KEY} ^
                     -Dsonar.projectName=${SONAR_PROJECT_NAME} ^
                     -Dsonar.sources=. ^
@@ -38,10 +43,10 @@ pipeline {
     }
     post {
         success {
-            echo 'Build and analysis completed successfully!'
+            echo 'Build, testing, and analysis completed successfully!'
         }
         failure {
-            echo 'Build or analysis failed!'
+            echo 'Build, testing, or analysis failed!'
         }
         always {
             echo 'Pipeline execution finished.'
