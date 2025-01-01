@@ -16,7 +16,7 @@ pipeline {
         }
         stage('Clean and Compile') {
             steps {
-                bat '''mvn clean compile
+                bat '''mvn build install
                 ''' // Clean and compile the project to ensure binaries are available
             }
         }
