@@ -17,19 +17,15 @@ pipeline {
         }
         stage('Clean and Compile') {
             steps {
-                bat '''mvn clean install
-                ''' // Clean and compile the project to ensure binaries are available
-            }
-        }
-        stage('Unit Tests') {
-            steps {
                  script {
                     // Set the system property for the ChromeDriver path
                     System.setProperty("webdriver.chrome.driver", "${env.CHROME_DRIVER_PATH}")
                 }
-                bat 'mvn test' // Run unit tests
+                bat '''mvn clean install
+                ''' // Clean and compile the project to ensure binaries are available
             }
         }
+
         stage('SonarQube Analysis') {
             environment {
                 SONAR_TOKEN = credentials('SonarQube') // Jenkins credential ID for SonarQube token
