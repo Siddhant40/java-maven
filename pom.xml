@@ -69,7 +69,7 @@
                 </executions>
             </plugin>
 
-            <!-- SonarQube Plugin for analysis -->
+          
         
 
 </project>
