@@ -1,13 +1,12 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>com.example</groupId>
-    <artifactId>selenium-automation</artifactId>
+    <artifactId>Maven-java</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
-
-    <properties>
-        <sonar.java.binaries>target/classes</sonar.java.binaries>
-    </properties>
 
     <dependencies>
         <!--  JUnit 5 dependency  -->
@@ -39,6 +38,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M5</version>
             </plugin>
+
             <!--  Jacoco Plugin for code coverage  -->
             <plugin>
                 <groupId>org.jacoco</groupId>
@@ -59,7 +59,8 @@
                     </execution>
                 </executions>
             </plugin>
-            <!-- SonarQube Maven Plugin -->
+
+            <!-- SonarQube Plugin for analysis -->
             <plugin>
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
@@ -67,4 +68,12 @@
             </plugin>
         </plugins>
     </build>
+
+    <!-- SonarQube Configuration -->
+    <properties>
+        <sonar.projectKey>Maven-java</sonar.projectKey>
+        <sonar.projectName>Maven-java</sonar.projectName>
+        <sonar.host.url>http://localhost:9000</sonar.host.url>
+        <sonar.login>sqp_f683595c1230b3e6165e77ae45cbfbac7d84a03a</sonar.login> <!-- Replace with your SonarQube token -->
+    </properties>
 </project>
