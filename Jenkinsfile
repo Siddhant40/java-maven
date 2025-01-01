@@ -15,14 +15,14 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/Siddhant40/java-maven.git' // Replace with your GitHub repository URL
             }
         }
-        stage('Build') {
+        stage('Clean and Compile') {
             steps {
-                bat 'mvn clean install' // Clean and build the project
+                bat 'mvn clean compile' // Clean and compile the project to ensure binaries are available
             }
         }
         stage('Unit Tests') {
             steps {
-                bat 'mvn test' // Run unit tests separately
+                bat 'mvn test' // Run unit tests
             }
         }
         stage('SonarQube Analysis') {
@@ -35,8 +35,9 @@ pipeline {
                     -Dsonar.projectKey=${SONAR_PROJECT_KEY} ^
                     -Dsonar.projectName=${SONAR_PROJECT_NAME} ^
                     -Dsonar.sources=. ^
+                    -Dsonar.java.binaries=target/classes ^
                     -Dsonar.host.url=${SONAR_HOST_URL} ^
-                    -Dsonar.token=%SONAR_TOKEN%
+                    -Dsonar.login=%SONAR_TOKEN%
                 """
             }
         }
