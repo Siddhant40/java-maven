@@ -4,7 +4,6 @@ pipeline {
         maven 'Maven' // Ensure this matches the Maven installation name in Jenkins
     }
     environment {
-        SONAR_SCANNER_PATH = 'C:\\Users\\91844\\Downloads\\sonar-scanner-cli-6.2.1.4610-windows-x64\\sonar-scanner-6.2.1.4610-windows-x64\\bin\\sonar-scanner.bat'
         SONAR_HOST_URL = 'http://localhost:9000'
         SONAR_PROJECT_KEY = 'Maven-java'
         SONAR_PROJECT_NAME = 'Maven-java'
@@ -31,7 +30,7 @@ pipeline {
             }
             steps {
                 bat """
-                    mvn sonar:sonar ^
+                    mvn clean verify sonar:sonar ^
                     -Dsonar.projectKey=${SONAR_PROJECT_KEY} ^
                     -Dsonar.projectName=${SONAR_PROJECT_NAME} ^
                     -Dsonar.sources=. ^
