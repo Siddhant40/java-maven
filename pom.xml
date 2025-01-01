@@ -70,19 +70,6 @@
             </plugin>
 
             <!-- SonarQube Plugin for analysis -->
-            <plugin>
-                <groupId>org.sonarsource.scanner.maven</groupId>
-                <artifactId>sonar-maven-plugin</artifactId>
-                <version>4.0.0.4121</version>
-            </plugin>
-        </plugins>
-    </build>
+        
 
-    <!-- SonarQube Configuration -->
-    <properties>
-        <sonar.projectKey>Maven-java</sonar.projectKey>
-        <sonar.projectName>Maven-java</sonar.projectName>
-        <sonar.host.url>http://localhost:9000</sonar.host.url>
-        <sonar.login>sqp_f683595c1230b3e6165e77ae45cbfbac7d84a03a</sonar.login> <!-- Replace with your SonarQube token -->
-    </properties>
 </project>
