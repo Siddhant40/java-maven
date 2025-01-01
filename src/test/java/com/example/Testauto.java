@@ -6,7 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class Test {
+public class Testauto {
     @Test
     public void testLogin() {
         // Set up the WebDriver
