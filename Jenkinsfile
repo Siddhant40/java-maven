@@ -16,7 +16,7 @@ pipeline {
         }
         stage('Clean and Compile') {
             steps {
-                bat '''mvn build install
+                bat '''mvn clean install
                 ''' // Clean and compile the project to ensure binaries are available
             }
         }
@@ -38,6 +38,8 @@ pipeline {
                    -Dsonar.java.binaries=target/classes ^
                     -Dsonar.host.url=${SONAR_HOST_URL} ^
                     -Dsonar.login=%SONAR_TOKEN%
+                    -Dsonar.exclusions=**/test/**  // Exclude files from test directories
+
                 """
             }
         }
