@@ -9,7 +9,7 @@
     <packaging>jar</packaging>
 
     <dependencies>
-        <!--  JUnit 5 dependency  -->
+        <!-- JUnit 5 dependency -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
@@ -22,15 +22,15 @@
             <version>5.8.2</version>
             <scope>test</scope>
         </dependency>
-        
-        <!--  Selenium WebDriver dependency  -->
+
+        <!-- Selenium WebDriver dependency -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>4.0.0</version>
         </dependency>
 
-        <!--  Servlet API dependency  -->
+        <!-- Servlet API dependency -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
@@ -41,14 +41,14 @@
 
     <build>
         <plugins>
-            <!--  Maven Surefire Plugin to run JUnit tests  -->
+            <!-- Maven Surefire Plugin to run JUnit tests -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M5</version>
             </plugin>
 
-            <!--  Jacoco Plugin for code coverage  -->
+            <!-- Jacoco Plugin for code coverage -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
@@ -69,7 +69,24 @@
                 </executions>
             </plugin>
 
-          
-        
+            <!-- SonarQube Plugin for static code analysis -->
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>4.0.0.4121</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>sonar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <sonar.tests>src/test/java</sonar.tests> <!-- Include only test files -->
+                    <sonar.test.inclusions>**/*.java</sonar.test.inclusions> <!-- Ensure test files are included correctly -->
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
