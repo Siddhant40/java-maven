@@ -82,8 +82,12 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <sonar.tests>src/test/java</sonar.tests> <!-- Include only test files -->
-                    <sonar.test.inclusions>**/*.java</sonar.test.inclusions> <!-- Ensure test files are included correctly -->
+                    <!-- Define only the test directory -->
+                    <sonar.tests>src/test/java</sonar.tests> <!-- Test files only -->
+
+                    <!-- Include all test files and exclude any unwanted files -->
+                    <sonar.test.inclusions>**/test/java/**/*.java</sonar.test.inclusions> <!-- All test files -->
+                    <sonar.exclusions>**/test/java/**/Testauto.java</sonar.exclusions> <!-- Exclude specific test file if needed -->
                 </configuration>
             </plugin>
         </plugins>
