@@ -4,6 +4,7 @@ pipeline {
         maven 'Maven' // Ensure this matches the Maven installation name in Jenkins
     }
     environment {
+        CHROME_DRIVER_PATH = 'C:\\Program Files\\chromedriver-win64\\chromedriver.exe'  // Update path if needed
         SONAR_HOST_URL = 'http://localhost:9000'
         SONAR_PROJECT_KEY = 'Maven-java'
         SONAR_PROJECT_NAME = 'Maven-java'
@@ -22,6 +23,10 @@ pipeline {
         }
         stage('Unit Tests') {
             steps {
+                 script {
+                    // Set the system property for the ChromeDriver path
+                    System.setProperty("webdriver.chrome.driver", "${env.CHROME_DRIVER_PATH}")
+                }
                 bat 'mvn test' // Run unit tests
             }
         }
