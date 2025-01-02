@@ -12,14 +12,8 @@
         <!-- JUnit 5 dependency -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>5.8.2</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.8.2</version>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.10.0</version>
             <scope>test</scope>
         </dependency>
 
@@ -27,7 +21,7 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>4.0.0</version>
+            <version>4.13.0</version>
         </dependency>
 
         <!-- Servlet API dependency -->
@@ -81,20 +75,7 @@
                         </goals>
                     </execution>
                 </executions>
-                <configuration>
-                    <properties>
-                        <!-- Define only the test directory -->
-                        <sonar.tests>src/test/java</sonar.tests>
-
-                        <!-- Include all test files (all *.java files in the test directory) -->
-                        <sonar.test.inclusions>**/test/java/**/*.java</sonar.test.inclusions>
-
-                        <!-- Exclude specific test file (e.g., Testauto.java if needed) -->
-                        <sonar.exclusions>**/test/java/**/Testauto.java</sonar.exclusions>
-                    </properties>
-                </configuration>
             </plugin>
         </plugins>
     </build>
-
 </project>
