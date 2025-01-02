@@ -17,10 +17,7 @@ pipeline {
         }
         stage('Clean and Compile') {
             steps {
-                script {
-                    // Set the system property for the ChromeDriver path
-                    System.setProperty("webdriver.chrome.driver", "${env.CHROME_DRIVER_PATH}")
-                }
+                
                 bat '''mvn clean install
                 ''' // Clean and compile the project to ensure binaries are available
             }
