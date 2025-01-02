@@ -7,15 +7,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class Testauto {
+class Testauto {
     @Test
-    public void testLogin() {
-        // Set up the WebDriver
-        // System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\chromedriver-win64\\chromedriver.exe");
-        // WebDriver driver = new ChromeDriver();
+     void testLogin() {
+       
         System.setProperty("webdriver.chrome.driver", "C:\\\\Program Files\\\\chromedriver-win64\\\\chromedriver.exe");
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*"); // Add this to handle WebSocket issues
+        options.addArguments("--remote-allow-origins=*"); 
         WebDriver driver = new ChromeDriver(options);
 
         try {
