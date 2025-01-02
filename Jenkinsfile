@@ -21,7 +21,8 @@ pipeline {
                     // Set the system property for the ChromeDriver path
                     System.setProperty("webdriver.chrome.driver", "${env.CHROME_DRIVER_PATH}")
                 }
-                bat '''mvn clean install
+                bat '''
+                mvn clean install
                 ''' // Clean and compile the project to ensure binaries are available
             }
         }
@@ -35,10 +36,9 @@ pipeline {
                     mvn clean verify sonar:sonar ^ 
                     -Dsonar.projectKey=${SONAR_PROJECT_KEY} ^ 
                     -Dsonar.projectName=${SONAR_PROJECT_NAME} ^ 
-                    -Dsonar.sources=test/java ^ 
+                    -Dsonar.sources=test/java/com/example/automation/ ^ 
                     -Dsonar.host.url=${SONAR_HOST_URL} ^ 
                     -Dsonar.tokan=%SONAR_TOKEN% ^ 
-                    -Dsonar.tests=test/java ^ 
                 """
             }
         }
