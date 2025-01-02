@@ -35,11 +35,10 @@ pipeline {
                     mvn clean verify sonar:sonar ^ 
                     -Dsonar.projectKey=${SONAR_PROJECT_KEY} ^ 
                     -Dsonar.projectName=${SONAR_PROJECT_NAME} ^ 
-                    -Dsonar.sources=src/test/java ^ 
+                    -Dsonar.sources=test/java ^ 
                     -Dsonar.host.url=${SONAR_HOST_URL} ^ 
-                    -Dsonar.login=%SONAR_TOKEN% ^ 
-                    -Dsonar.tests=src/test/java ^ 
-                    -Dsonar.exclusions=**/src/main/**
+                    -Dsonar.tokan=%SONAR_TOKEN% ^ 
+                    -Dsonar.tests=test/java ^ 
                 """
             }
         }
