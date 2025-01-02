@@ -33,11 +33,12 @@ pipeline {
                     mvn clean verify sonar:sonar ^ 
                     -Dsonar.projectKey=${SONAR_PROJECT_KEY} ^ 
                     -Dsonar.projectName=${SONAR_PROJECT_NAME} ^ 
-                    -Dsonar.sources=src/test/java ^ 
+                    -Dsonar.sources=src/main/java ^ 
+                    -Dsonar.tests=src/test/java ^
                     -Dsonar.host.url=${SONAR_HOST_URL} ^ 
-                    -Dsonar.login=%SONAR_TOKEN% ^ 
-                    -Dsonar.tests=src/test/java ^ 
+                    -Dsonar.token=%SONAR_TOKEN% ^ 
                     -Dsonar.exclusions=**/src/main/**
+                    -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
                 """
             }
         }
