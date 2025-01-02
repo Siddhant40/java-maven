@@ -17,7 +17,7 @@ pipeline {
         }
         stage('Clean and Compile') {
             steps {
-                 script {
+                script {
                     // Set the system property for the ChromeDriver path
                     System.setProperty("webdriver.chrome.driver", "${env.CHROME_DRIVER_PATH}")
                 }
@@ -26,19 +26,20 @@ pipeline {
             }
         }
 
-        stage('SonarQube Analysis') {
+        stage('SonarQube Analysis - Test Files Only') {
             environment {
                 SONAR_TOKEN = credentials('SonarQube') // Jenkins credential ID for SonarQube token
             }
             steps {
                 bat """
-                    mvn clean verify sonar:sonar ^
-                    -Dsonar.projectKey=${SONAR_PROJECT_KEY} ^
-                    -Dsonar.projectName=${SONAR_PROJECT_NAME} ^
-                    -Dsonar.sources=. ^
-                    -Dsonar.host.url=${SONAR_HOST_URL} ^
-                    -Dsonar.login=%SONAR_TOKEN%
-                    -Dsonar.exclusions=**/test/**  // Exclude files from test directories
+                    mvn clean verify sonar:sonar ^ 
+                    -Dsonar.projectKey=${SONAR_PROJECT_KEY} ^ 
+                    -Dsonar.projectName=${SONAR_PROJECT_NAME} ^ 
+                    -Dsonar.sources=src/test/java ^ 
+                    -Dsonar.host.url=${SONAR_HOST_URL} ^ 
+                    -Dsonar.login=%SONAR_TOKEN% ^ 
+                    -Dsonar.tests=src/test/java ^ 
+                    -Dsonar.exclusions=**/src/main/**
                 """
             }
         }
