@@ -68,8 +68,9 @@
                         <goals>
                             <goal>report</goal>
                         </goals>
-                    </executions>
-                </plugin>
+                    </execution>
+                </executions> <!-- Correctly closed </executions> -->
+            </plugin>
 
             <!-- SonarQube Plugin for static code analysis -->
             <plugin>
@@ -82,7 +83,7 @@
                             <goal>sonar</goal>
                         </goals>
                     </execution>
-                </executions>
+                </executions> <!-- Correctly closed </executions> -->
                 <configuration>
                     <properties>
                         <sonar.host.url>http://localhost:9000</sonar.host.url> <!-- Set your SonarQube server URL -->
@@ -109,7 +110,7 @@
                             </rulesets>
                         </configuration>
                     </execution>
-                </executions>
+                </executions> <!-- Correctly closed </executions> -->
             </plugin>
         </plugins>
     </build>
