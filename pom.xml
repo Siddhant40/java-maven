@@ -90,7 +90,26 @@
                     </properties>
                 </configuration>
             </plugin>
+
+            <!-- PMD Plugin for Duplicate Code Detection -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <version>3.16.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>pmd</goal>
+                        </goals>
+                        <configuration>
+                            <rulesets>
+                                <ruleset>/path/to/your/ruleset.xml</ruleset> <!-- Add your custom ruleset or default ones -->
+                            </rulesets>
+                            <targetJdk>1.8</targetJdk>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
-
 </project>
