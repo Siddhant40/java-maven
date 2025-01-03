@@ -1,4 +1,5 @@
 package com.example.automation;
+import com.example.Calculator; // adjust the package if needed
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
