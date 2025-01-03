@@ -19,7 +19,7 @@ public class Testauto {
 
         try {
             // Navigate to the login page
-            driver.get("http://localhost:8080/YourAppName/login");
+            driver.get("http://localhost:8080/java-maven/login");
 
             // Interact with the login form
             WebElement usernameField = driver.findElement(By.id("username"));
@@ -33,7 +33,7 @@ public class Testauto {
 
             // Verify successful redirection to the dashboard
             String currentUrl = driver.getCurrentUrl();
-            assertEquals("http://localhost:8080/YourAppName/dashboard", currentUrl);
+            assertEquals("http://localhost:8080/java-maven/dashboard", currentUrl);
 
             // Add tests for invalid login scenarios here, such as empty fields or wrong credentials
             WebElement errorMessage = driver.findElement(By.id("errorMessage"));
