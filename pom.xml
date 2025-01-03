@@ -8,29 +8,34 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+    </properties>
+
     <dependencies>
-        <!-- JUnit 5 dependency -->
+        <!-- JUnit 5 (JUnit Jupiter) -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.8.2</version>
+            <version>5.10.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.8.2</version>
+            <version>5.10.0</version>
             <scope>test</scope>
         </dependency>
 
-        <!-- Selenium WebDriver dependency -->
+        <!-- Selenium WebDriver -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>4.0.0</version>
+            <version>4.12.0</version>
         </dependency>
 
-        <!-- Servlet API dependency -->
+        <!-- Servlet API -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
@@ -41,21 +46,32 @@
 
     <build>
         <plugins>
-            <!-- Maven Surefire Plugin to run JUnit tests -->
+            <!-- Maven Compiler Plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <source>11</source>
+                    <target>11</target>
+                </configuration>
+            </plugin>
+
+            <!-- Maven Surefire Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M5</version>
+                <version>3.1.2</version>
                 <configuration>
                     <useModulePath>false</useModulePath>
                 </configuration>
             </plugin>
 
-            <!-- Jacoco Plugin for code coverage -->
+            <!-- Jacoco Plugin for Code Coverage -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.7</version>
+                <version>0.8.8</version>
                 <executions>
                     <execution>
                         <goals>
@@ -69,48 +85,39 @@
                             <goal>report</goal>
                         </goals>
                     </execution>
-                </executions> <!-- Correctly closed </executions> -->
+                </executions>
             </plugin>
 
-            <!-- SonarQube Plugin for static code analysis -->
+            <!-- SonarQube Plugin -->
             <plugin>
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
-                <version>4.0.0.4121</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>sonar</goal>
-                        </goals>
-                    </execution>
-                </executions> <!-- Correctly closed </executions> -->
+                <version>4.7.0.2747</version>
                 <configuration>
-                    <properties>
-                        <sonar.host.url>http://localhost:9000</sonar.host.url> <!-- Set your SonarQube server URL -->
-                        <sonar.tests>src/test/java</sonar.tests>
-                        <sonar.test.inclusions>**/test/java/**/*.java</sonar.test.inclusions>
-                        <sonar.exclusions>**/test/java/**/Testauto.java</sonar.exclusions>
-                    </properties>
+                    <sonar.host.url>http://localhost:9000</sonar.host.url>
+                    <sonar.tests>src/test/java</sonar.tests>
+                    <sonar.test.inclusions>**/test/java/**/*.java</sonar.test.inclusions>
                 </configuration>
             </plugin>
 
-            <!-- PMD Plugin for code duplication and static analysis -->
+            <!-- PMD Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
-                <version>3.13.0</version>
+                <version>3.17.0</version>
                 <executions>
                     <execution>
+                        <phase>verify</phase>
                         <goals>
-                            <goal>pmd</goal>
+                            <goal>check</goal>
                         </goals>
                         <configuration>
                             <rulesets>
-                                <ruleset>rulesets/java/duplicates.xml</ruleset> <!-- Ensure this is correct -->
+                                <ruleset>rulesets/java/quickstart.xml</ruleset>
                             </rulesets>
                         </configuration>
                     </execution>
-                </executions> <!-- Correctly closed </executions> -->
+                </executions>
             </plugin>
         </plugins>
     </build>
