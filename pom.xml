@@ -9,25 +9,25 @@
     <packaging>jar</packaging>
 
     <dependencies>
-        <!-- JUnit 5 dependency (Updated to version 5.10.0) -->
+        <!-- JUnit 5 dependency -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.10.0</version>
+            <version>5.8.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.10.0</version>
+            <version>5.8.2</version>
             <scope>test</scope>
         </dependency>
 
-        <!-- Selenium WebDriver dependency (Updated to version 4.13.0) -->
+        <!-- Selenium WebDriver dependency -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>4.13.0</version>
+            <version>4.0.0</version>
         </dependency>
 
         <!-- Servlet API dependency -->
@@ -41,11 +41,14 @@
 
     <build>
         <plugins>
-            <!-- Maven Surefire Plugin (Stable version recommended) -->
+            <!-- Maven Surefire Plugin to run JUnit tests -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0</version> <!-- Stable version -->
+                <version>3.0.0-M5</version>
+                <configuration>
+                    <useModulePath>false</useModulePath>
+                </configuration>
             </plugin>
 
             <!-- Jacoco Plugin for code coverage -->
@@ -83,7 +86,7 @@
                 </executions>
                 <configuration>
                     <properties>
-                        <sonar.host.url>http://localhost:9000</sonar.host.url> <!-- Your SonarQube server URL -->
+                        <sonar.host.url>http://localhost:9000</sonar.host.url>
                         <sonar.tests>src/test/java</sonar.tests>
                         <sonar.test.inclusions>**/test/java/**/*.java</sonar.test.inclusions>
                         <sonar.exclusions>**/test/java/**/Testauto.java</sonar.exclusions>
@@ -91,11 +94,11 @@
                 </configuration>
             </plugin>
 
-            <!-- PMD Plugin for Duplicate Code Detection -->
+            <!-- PMD Plugin for code duplication and static analysis -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
-                <version>3.16.0</version>
+                <version>3.13.0</version>
                 <executions>
                     <execution>
                         <goals>
@@ -103,12 +106,30 @@
                         </goals>
                         <configuration>
                             <rulesets>
-                                <ruleset>/path/to/your/ruleset.xml</ruleset> <!-- Add your custom ruleset or default ones -->
+                                <ruleset>rulesets/java/duplicates.xml</ruleset>
                             </rulesets>
-                            <targetJdk>1.8</targetJdk>
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+
+            <!-- Checkstyle Plugin for code style checks -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <configLocation>google_checks.xml</configLocation> <!-- You can use your own Checkstyle configuration -->
+                    <encoding>UTF-8</encoding>
+                    <consoleOutput>true</consoleOutput>
+                </configuration>
             </plugin>
         </plugins>
     </build>
