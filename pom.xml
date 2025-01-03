@@ -126,7 +126,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <configLocation>google_checks.xml</configLocation> <!-- You can use your own Checkstyle configuration -->
+                    <configLocation>src/main/resources/checkstyle/google_checks.xml</configLocation> <!-- You can use your own Checkstyle configuration -->
                     <encoding>UTF-8</encoding>
                     <consoleOutput>true</consoleOutput>
                 </configuration>
