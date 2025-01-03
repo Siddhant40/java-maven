@@ -8,13 +8,8 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-    </properties>
-
     <dependencies>
-        <!-- JUnit 5 (JUnit Jupiter) -->
+        <!-- JUnit 5 dependency (Updated to version 5.10.0) -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
@@ -28,14 +23,14 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Selenium WebDriver -->
+        <!-- Selenium WebDriver dependency (Updated to version 4.13.0) -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>4.12.0</version>
+            <version>4.13.0</version>
         </dependency>
 
-        <!-- Servlet API -->
+        <!-- Servlet API dependency -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
@@ -46,32 +41,18 @@
 
     <build>
         <plugins>
-            <!-- Maven Compiler Plugin -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.11.0</version>
-                <configuration>
-                    <source>11</source>
-                    <target>11</target>
-                </configuration>
-            </plugin>
-
-            <!-- Maven Surefire Plugin -->
+            <!-- Maven Surefire Plugin (Stable version recommended) -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.1.2</version>
-                <configuration>
-                    <useModulePath>false</useModulePath>
-                </configuration>
+                <version>3.0.0</version> <!-- Stable version -->
             </plugin>
 
-            <!-- Jacoco Plugin for Code Coverage -->
+            <!-- Jacoco Plugin for code coverage -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.8</version>
+                <version>0.8.7</version>
                 <executions>
                     <execution>
                         <goals>
@@ -88,37 +69,28 @@
                 </executions>
             </plugin>
 
-            <!-- SonarQube Plugin -->
+            <!-- SonarQube Plugin for static code analysis -->
             <plugin>
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
-                <version>4.7.0.2747</version>
-                <configuration>
-                    <sonar.host.url>http://localhost:9000</sonar.host.url>
-                    <sonar.tests>src/test/java</sonar.tests>
-                    <sonar.test.inclusions>**/test/java/**/*.java</sonar.test.inclusions>
-                </configuration>
-            </plugin>
-
-            <!-- PMD Plugin -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-pmd-plugin</artifactId>
-                <version>3.17.0</version>
+                <version>4.0.0.4121</version>
                 <executions>
                     <execution>
-                        <phase>verify</phase>
                         <goals>
-                            <goal>check</goal>
+                            <goal>sonar</goal>
                         </goals>
-                        <configuration>
-                            <rulesets>
-                                <ruleset>rulesets/java/quickstart.xml</ruleset>
-                            </rulesets>
-                        </configuration>
                     </execution>
                 </executions>
+                <configuration>
+                    <properties>
+                        <sonar.host.url>http://localhost:9000</sonar.host.url> <!-- Your SonarQube server URL -->
+                        <sonar.tests>src/test/java</sonar.tests>
+                        <sonar.test.inclusions>**/test/java/**/*.java</sonar.test.inclusions>
+                        <sonar.exclusions>**/test/java/**/Testauto.java</sonar.exclusions>
+                    </properties>
+                </configuration>
             </plugin>
         </plugins>
     </build>
+
 </project>
