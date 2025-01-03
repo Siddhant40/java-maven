@@ -1,31 +1,46 @@
-@Test
-void testLocalLoginServlet() {
-    System.setProperty("webdriver.chrome.driver", "C:\\\\Program Files\\\\chromedriver-win64\\\\chromedriver.exe");
-    ChromeOptions options = new ChromeOptions();
-    options.addArguments("--remote-allow-origins=*");
-    WebDriver driver = new ChromeDriver(options);
+package com.example.automation;
 
-    try {
-        // Navigate to the locally hosted servlet
-        driver.get("http://localhost:8080/YourAppName/login");
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-        // Interact with the login form
-        WebElement usernameField = driver.findElement(By.id("username"));
-        WebElement passwordField = driver.findElement(By.id("password"));
-        WebElement loginButton = driver.findElement(By.id("loginButton"));
+public class Testauto {
 
-        // Test valid login
-        usernameField.sendKeys("testUser");
-        passwordField.sendKeys("testPassword");
-        loginButton.click();
+    @Test
+    void testLoginFunctionality() {
+        System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\chromedriver-win64\\chromedriver.exe");
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--remote-allow-origins=*");
+        WebDriver driver = new ChromeDriver(options);
 
-        // Verify successful redirection
-        String currentUrl = driver.getCurrentUrl();
-        assertEquals("http://localhost:8080/YourAppName/dashboard", currentUrl);
+        try {
+            // Navigate to the login page
+            driver.get("http://localhost:8080/YourAppName/login");
 
-        // Add other tests for invalid login, missing fields, etc.
+            // Interact with the login form
+            WebElement usernameField = driver.findElement(By.id("username"));
+            WebElement passwordField = driver.findElement(By.id("password"));
+            WebElement loginButton = driver.findElement(By.id("loginButton"));
 
-    } finally {
-        driver.quit();
+            // Test valid login
+            usernameField.sendKeys("testUser");
+            passwordField.sendKeys("testPassword");
+            loginButton.click();
+
+            // Verify successful redirection to the dashboard
+            String currentUrl = driver.getCurrentUrl();
+            assertEquals("http://localhost:8080/YourAppName/dashboard", currentUrl);
+
+            // Add tests for invalid login scenarios here, such as empty fields or wrong credentials
+            WebElement errorMessage = driver.findElement(By.id("errorMessage"));
+            assertEquals("Invalid credentials, please try again.", errorMessage.getText());
+
+        } finally {
+            driver.quit();
+        }
     }
 }
