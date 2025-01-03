@@ -39,7 +39,7 @@ class CalculatorTest {
 }
 
 // Selenium Test Class for UI Automation
-public class Testauto {
+class Testauto {
     @Test
     void testLoginFunctionality() {
         System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\chromedriver-win64\\chromedriver.exe");
