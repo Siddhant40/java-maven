@@ -1,3 +1,4 @@
+package com.example;
 public class Calculator {
     // Adds two numbers
     public int add(int a, int b) {
